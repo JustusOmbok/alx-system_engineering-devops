@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-#sript displays a list of all currently running processes
+#Script displays a list of all currently running processes
 
-ps auxf
+ps -auxf
