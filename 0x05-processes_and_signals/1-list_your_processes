@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+#sript displays a list of all currently running processes
+
+
+#'ps' command gets process info and display in user format
+#'e' selects all processes
+#'f' generates a full listing
+#'H' shows process hierachy
+#'o' customizes output format
+
+ps -e -fH -o user,pid,%cpu,%mem,vsz,rss,tty,stat,start,time,command
