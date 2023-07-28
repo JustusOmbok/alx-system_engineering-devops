@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#Script displays lines containing the word "babsh" and the PID of the current Bash  proccess is extracted
+
+ps auxf | grep "bash"
