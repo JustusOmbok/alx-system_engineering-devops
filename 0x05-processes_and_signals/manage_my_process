@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+#the script writes "I am alive!" to file /tmp/my_process every 2 seconds
+#infinite loop
+
+while true
+do
+	echo "I am alive!" >> /tmp/my_process
+	sleep 2
+done
