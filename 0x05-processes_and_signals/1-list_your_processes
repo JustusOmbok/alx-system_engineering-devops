@@ -2,4 +2,4 @@
 
 #Script displays a list of all currently running processes
 
-ps auxf
+ps -auxf
