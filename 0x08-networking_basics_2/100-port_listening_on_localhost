@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+#listening on port 98 using netcat
+
+nc -l 98
