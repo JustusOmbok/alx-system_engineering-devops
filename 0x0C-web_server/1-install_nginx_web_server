@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Updates the package list and installs Nginx
+#Creates an html file with "hello world"
+#Ensures Nginx is listening on port 80
+#Reloads Nginx to apply configs
+
+sudo apt-get update
+sudo apt-get install -y nginx
+echo "Hello World!" > /var/www/html/index.html
+sudo sed -i 's/80 default_server;/80;/g' /etc/nginx/sites-available/default
+sudo service nginx reload
