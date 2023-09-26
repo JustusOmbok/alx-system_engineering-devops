@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Installs nginx and restarts it
+# Sets nginx on firewall
+# Creates new index.html
+#redirect to youtube video
+# Sets up page 404
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+echo -e "Hello World!"  >> /var/www/html/index.html
+
+sudo chown -R $USER:$USER /var/www/html
+sudo chmod -R 755 /var/www
+
+sudo sed -i '27i\rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+echo -e "Ceci n'est pas une page\n" >> /var/www/html/error_404.html
+sudo sed -i '28i\error_page 404 /error_404.html;' /etc/nginx/sites-available/defaul
+
+sudo service nginx start
