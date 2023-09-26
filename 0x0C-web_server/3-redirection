@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#Installs nginx if not installed
+#Creates a config file for redirection
+#Create symbolic link to enable the site
+#Test nginx config and reload
+sudo apt-get -y install nginx
+ufw allow 'Nginx HTTP'
+echo "Hello World!" >> /var/www/html/index.html
+
+sudo chown -R $USER:$USER /var/www/html
+sudo chmod -R 755 /var/www
+
+sudo sed -i 'rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+
+service nginx start
