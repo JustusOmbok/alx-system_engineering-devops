@@ -30,4 +30,4 @@ backend servers
 EOL
 
 
-sudo systemctl restart haproxy
+sudo service haproxy restart
