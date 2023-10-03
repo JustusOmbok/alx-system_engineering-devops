@@ -5,44 +5,17 @@
 # Creates html; file
 # Reloads and restarts nginx
 
-exec { 'apt-update':
-  command => 'apt-get update',
-  path    => '/usr/bin',
-  user    => 'root',
-  notify  => Service['nginx'],
+exec { 'update':
+  command => '/usr/bin/apt-get update',
 }
-
-package { 'nginx':
-  ensure => 'installed',
-  require => Exec['apt-update'],
+-> package {'nginx':
+  ensure => 'present',
 }
-
-class { 'ufw':
-  enable => true,
+-> file_line { 'http_header':
+  path  => '/etc/nginx/nginx.conf',
+  match => 'http {',
+  line  => "http {\n\tadd_header X-Served-By \"${hostname}\";",
 }
-
-ufw::allow { 'Nginx HTTP':
-  port    => 80,
-  proto   => 'tcp',
-  comment => 'Allow Nginx HTTP',
-  require => 'Class['ufw'],
-}
-
-file { '/etc/nginx/conf.d/custom_http_header.conf':
-  ensure   => 'present',
-  content  => 'location / {\n add_header X-Served-By $hostname;\n}\n",
-  require  => Package['nginx'],
-}
-
-file { '/var/www/html/index.nginx-debian.html':
-  ensure  => 'present',
-  content => 'Hello World!',
-  require => Package['nginx'],
-}
-
-service { 'nginx':
-  ensure     => 'running',
-  enable     => true,
-  require    => [File['/etc/nginx/conf.d/custom_http_header.conf'], File['/var/www/html/index.nginx-debian.html']],
-  subscribe  => Exec['apt-update'],
+-> exec {'run':
+  command => '/usr/sbin/service nginx restart',
 }
