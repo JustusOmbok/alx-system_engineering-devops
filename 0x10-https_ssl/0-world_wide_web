@@ -11,7 +11,7 @@ query_dns() {
         subdomains=("$subdomain")
     fi
 
-    for sub in "${subdomain[@]}"; do
+    for sub in "${subdomains[@]}"; do
         result=$(dig "$sub.$domain" +short)
 	record_type=$(dig "$sub.$domain" +short -t ANY)
 	echo "The subdomain $sub is a $record_type record and points to $result"
