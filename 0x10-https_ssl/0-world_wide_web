@@ -13,7 +13,7 @@ query_dns() {
 
     for sub in "${subdomains[@]}"; do
         result=$(dig "$sub.$domain" +short)
-	record_type=$(dig "$sub.$domain" +short -t ANY)
+	record_type=$(dig "$sub.$domain" +short -t A)
 	echo "The subdomain $sub is a $record_type record and points to $result"
     done
 }
