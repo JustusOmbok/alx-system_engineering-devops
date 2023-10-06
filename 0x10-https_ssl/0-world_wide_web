@@ -15,8 +15,8 @@ query_dns() {
 domain="$1"
 subdomain="$2"
 
-for sub in "www" "lb-01" "web-01" "web-02"
-	if [ -z "$subdomain" ] || [ "$subdomain" == "$sub" ] ;
+for sub in "www" "lb-01" "web-01" "web-02"; do
+	if [ -z "$subdomain" ] || [ "$subdomain" == "$sub" ]
 		query_dns "$domain" "sub"
 	fi
 done
