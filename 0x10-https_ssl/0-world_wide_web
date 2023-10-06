@@ -9,7 +9,7 @@ query_dns() {
 
     local record_type=$(dig "$subdomain.$domain" +short -t ANY)
 
-    echo "The subdomain $subdomain is a $record_type record and points to $anser_section"
+    echo "The subdomain $subdomain is a $record_type record and points to $answer_section"
 }
 
 domain="$1"
@@ -17,6 +17,4 @@ subdomain="$2"
 
 for sub in "www" "lb-01" "web-01" "web-02"; do
 	if [ -z "$subdomain" ] || [ "$subdomain" == "$sub" ]
-		query_dns "$domain" "sub"
-	fi
-done
+		query_dns "$domain" "$sub"
