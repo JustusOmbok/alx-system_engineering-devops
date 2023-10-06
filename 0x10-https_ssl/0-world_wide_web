@@ -8,7 +8,7 @@ query_dns() {
     local answer_section=$(dig "$subdomain.$domain" +short)
 
     local answer_info=$(dig "$subdomain.$domain" +short -t ANY)
-    local record_type=$(echo "$answer_info" | awk '{print $3}')
+    local record_type=$(echo "$answer_info" | awk '{print $4}')
 
     echo "The subdomain $subdomain is a $record_type record and points to $answer_section"
 }
