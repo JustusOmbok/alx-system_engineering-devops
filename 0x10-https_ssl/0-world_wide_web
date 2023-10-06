@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+# A function to query DNS
+
+query_dns() {
+    local domain="$1"
+    local subdomain="$2"
+
+    if [ -z "$subdomain" ]; then
+        subdomains=("www" "lb-01" "web-01" "web-02")
+    else
+        subdomains=("$subdomain")
+    fi
+
+    for sub in "${subdomain[@]}"; do
+        result=$(dig "$sub.$domain" +short)
+	record_type=$(dig "$sub.$domain" +short -t ANY)
+	echo "The subdomain $sub is a $record_type record and points to $result"
+    done
+}
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage: $0 <domain> [subdomain]"
+    exit 1
+fi
+
+domain="$1"
+subdomain="$2"
+
+query_dns "$domain" "$subdomain"
