@@ -13,23 +13,22 @@ global
    ca-base /etc/ssl/certs
    crt-base /etc/ssl/private
 
-
-frontend http-in
-   bind *:80
-   bind *:443 ssl crt /etc/letsencrypt/live/www.ombokjustus.tech-0001/fullchain.pem
-   mode http
-   default_backend servers
+defaults
    timeout client 30s
    timeout server 30s
    timeout connect 5s
+
+
+frontend http-in
+   bind *:80
+   bind *:443 ssl crt /etc/letsencrypt/live/www.ombokjustus.tech/example.com.pem
+   mode http
+   default_backend servers
 
 backend servers
    mode http
    balance roundrobin
    option httpclose
    option forwardfor
-   timeout client 30s
-   timeout server 30s
-   timeout connect 5s
    server 261084-web-01 18.209.223.53:80 check
    server 261084-web-02 54.160.76.99:80 check
