@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Fixes the container for nginx to run as nginx user and not root
+sudo chmod 644 /etc/nginx/nginx.conf
+sudo sed -i 's/user www-data;/user nginx;/' /etc/nginx/nginx.conf
+
+# stop apache2 if it's running
+sudo service apache2 stop
+
+# update server block to listen on 8080
+sudo sed -i 's/listen 80;/listen 8080;/' /etc/nginx/sites-available/default
+
+sudo service nginx restart
