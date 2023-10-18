@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Checks for the required argument
+# Defines mysql credentials
+# Sets current date
+# Compresses the dump to a tar.gz archive
+
+mysqldump -uroot -p"$1" --all-databases > backup.sql
+tar -czvf $"(date + %d-%b-%Y).tar.gz" backup.sql
