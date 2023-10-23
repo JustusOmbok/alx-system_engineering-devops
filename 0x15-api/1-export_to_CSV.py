@@ -11,7 +11,6 @@ def write_to_csv(_data, _id):
         headers = ["USER_ID", "USERNAME",
                    "TASK_COMPLETED_STATUS", "TASK_TITLE"]
         csv_writer = DictWriter(file, fieldnames=headers, quoting=QUOTE_ALL)
-        csv_writer.writeheader()
         csv_writer.writerows(_data)
 
 
