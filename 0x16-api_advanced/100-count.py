@@ -5,8 +5,6 @@
 def count_words(subreddit, word_list=[], after=None, counts={}):
     """ Retrieves hot topics occurrencesby on reddit."""
     import requests
-    if counts is None:
-        counts = {}
 
     headers = {'User-Agent': 'Ombok)'}
     url = (
