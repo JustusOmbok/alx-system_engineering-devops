@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+#Config file to automate gunicorn restart
+[Unit]
+Description=Gunicorn instance to serve AirBnB Clone
+After=network.target
+
+[Service]
+User=ubuntu
+WorkingDirectory=/home/ubuntu/AirBnB_clone_v4
+ExecStart=gunicorn --workers 3 --bind 0.0.0.0:5003 web_dynamic.2-hbnb:app --error-logfile /home/ubuntu/gunicorn_logs/airbnb-error.log
+Restart=always
+StandardOutput=append:/tmp/airbnb-access.log
+StandardError=append:/home/ubuntu/gunicorn_logs/airbnb-error.log
+SyslogIdentifier=gunicorn
+KillSignal=SIGQUIT
+TimeoutSec=60
+
+[Install]
+WantedBy=multi-user.target
